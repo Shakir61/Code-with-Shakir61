@@ -1,0 +1,52 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+   int data;
+   Node *next;
+   
+   Node(int val)
+   {
+       data = value;
+       next = NULL;
+   }
+   
+};
+
+class List{
+  Node *head;
+  Node *tail;
+  
+public: 
+  List()
+  {
+      head = tail = NULL;
+  }
+  
+  void push_front(int value)
+  {
+      Node* newNode = new Node(value); // dynamic object.
+      if(head == NULL)
+      {
+          head = tail = newNode;
+          return;
+      }
+      else
+      {
+          newNode->next=head;
+          head=newNode;
+      }
+  }
+};
+
+int main() {
+    
+    List L1();
+    L1.push_front(1);
+    L1.push_front(11);
+    L1.push_front(111);
+
+    return 0;
+}
