@@ -9,7 +9,7 @@ public:
    
    Node(int val)
    {
-       data = value;
+       data = val;
        next = NULL;
    }
    
@@ -50,7 +50,7 @@ void push_back(int value)
       else
       {
           tail->next=newNode;
-          newNode=tail;
+          tail=newNode;
       }
   }
   
@@ -65,7 +65,6 @@ void push_back(int value)
           head=head->next;
           temp->next = NULL;
           
-          cout << "Node containing " << temp->data << " deleted successfully.." << endl;
           delete temp;
       
   }
@@ -85,9 +84,59 @@ void push_back(int value)
       }
           temp->next=NULL;
           
-          cout << "Node containing " << tail->data << " deleted successfully.." << endl;
           delete tail;
           tail = temp;
+  }
+  
+  void insert(int node, int pos)
+  {
+      if(pos<0)
+      {
+          cout << "Invalid Position...." << endl;
+          return;
+      }
+      
+      if(pos == 0)
+      {
+          push_front(node);
+          return;
+      }
+     
+        Node* temp = head;
+        for(int i = 0; i < pos-1; i++)
+        {
+            if(temp == NULL)
+            {
+                cout << "Invalid position..." << endl;
+                return;
+            }
+            temp = temp->next;
+        }
+         
+        Node* newNode = new Node(node);
+        newNode->next=temp->next;  
+        temp->next=newNode;
+         
+  }
+  
+int searchLL(int node)
+  {
+      Node* position = head;
+      int index = 0;
+      
+      cout << "Your desired node is at position: ";
+      while(position != NULL)
+      {
+          if(position->data == node)
+          {
+              return index;
+          }
+          
+          position = position->next;
+          index++;
+      }
+      
+      return -1;
   }
   
   void printLL()
@@ -106,7 +155,7 @@ void push_back(int value)
 
 int main() {
     
-    List LL1();
+    List LL1;
     LL1.push_front(1);
     LL1.push_front(11);
     LL1.push_front(111);
@@ -126,6 +175,11 @@ int main() {
     LL1.pop_back();
     LL1.printLL();
 
-
+    LL1.insert(22, 2);
+    LL1.printLL();
+    
+    LL1.insert(33, 2);
+    LL1.printLL();
+    cout << LL1.searchLL(1) << endl;
     return 0;
 }
