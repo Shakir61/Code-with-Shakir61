@@ -1,0 +1,111 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+  int data;
+  Node *next;
+  Node *prev;
+  
+  Node(int value)
+  {
+      data = value;
+      next = prev = NULL;
+  }
+  
+};
+
+class DoublyList{
+private: 
+  Node *head;
+  Node *tail;
+  
+public:
+  DoublyList()
+  {
+      head = tail = NULL;
+  }
+  
+  void push_front(int nodeVal)
+  {
+        Node* newNode = new Node(nodeVal);
+        if(head == NULL)
+        {
+            head = tail = newNode;
+        }
+        else
+        {
+            newNode->next=head;
+            head->prev=newNode;
+            head=newNode;
+        }
+  }
+  
+  void push_back(int nodeVal)
+  {
+      Node* newNode = new Node(nodeVal);
+      
+      if (head == NULL)
+      {
+          head = tail = newNode;
+      }
+      else
+      {
+          newNode->prev=tail;
+          tail->next=newNode;
+          tail=newNode;
+      }
+  }
+  
+  void pop_front()
+  {
+      Node* temp = head;
+      head = temp->next;
+      
+      if(head != NULL)
+      {
+          head->prev=NULL;
+          temp->next=NULL;
+          delete temp;
+      }
+  }
+  
+  void printDoubleList()
+  {
+      if(head == NULL)
+      {
+          cout << "The linked list is empty..." << endl;
+      }
+      else
+      {
+          Node* temp = head;
+          while(temp != NULL)
+          {
+              cout << temp->data << " <=> ";
+              temp=temp->next;
+          }
+          
+          cout << "NULL" << endl;
+      }
+  }
+  
+};
+
+int main() {
+    DoublyList Dl1;
+    
+    Dl1.push_front(1);
+    Dl1.push_front(2);
+    Dl1.push_front(3);
+    Dl1.printDoubleList();
+    Dl1.push_back(2);
+    Dl1.push_back(3);
+    Dl1.push_back(4);
+    Dl1.printDoubleList();
+    Dl1.pop_front();
+    Dl1.pop_front();
+    Dl1.printDoubleList();
+    
+    return 0;
+}
