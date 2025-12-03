@@ -43,6 +43,73 @@ public:
           
  }
  
+ void insertAtTail(int NodeVal)
+ {
+     Node* newNode = new Node(NodeVal);
+     if(head == NULL)
+     {
+         head = tail = NULL;
+         tail->next = head;
+     }
+     else
+     {
+         newNode->next = head;
+         tail->next = newNode;
+         tail=newNode;
+     }
+ }
+ 
+void deleteHead()
+{
+    if(head == NULL)
+    {
+        cout << "There are no nodes in the circular linked list....." << endl;
+    }
+    else if(head == tail)
+    {
+        delete head;
+        head = tail = NULL;
+    }
+    else
+    {
+        Node* temp = head;
+        head = temp->next;
+        tail->next=head;
+        
+        temp->next=NULL;
+        delete temp;
+    }
+}
+
+void deleteTail()
+{
+    if(head == NULL)
+    {
+        cout << "There are no nodes in the circular linked list....." << endl;
+    }
+    else if(head == tail)
+    {
+        delete tail;
+        head = tail = NULL;
+    }
+    else
+    {
+        Node* temp = tail;
+        Node* prev = head;
+        
+        while(prev->next != tail)
+        {
+            prev=prev->next;
+        }
+        
+        tail = prev;
+        tail->next=head;
+        
+        temp->next=NULL;
+        delete temp;
+    }
+}
+ 
  void print()
  {
      if(head == NULL)
@@ -69,6 +136,15 @@ int main() {
     cl1.insertAtHead(3);
     cl1.insertAtHead(2);
     cl1.insertAtHead(1);
+    cl1.print();
+    cl1.insertAtTail(0);
+    cl1.insertAtTail(20);
+    cl1.print();
+    cl1.deleteHead();
+    cl1.print();
+    cl1.deleteTail();
+    cl1.print();
+    cl1.deleteTail();
     cl1.print();
     return 0;
 }
