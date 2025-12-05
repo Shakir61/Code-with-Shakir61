@@ -1,0 +1,104 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+  int data;
+  Node* next;
+  Node* prev;
+  
+  Node(int value)
+  {
+      data = value;
+      next = prev = NULL;
+  }
+};
+
+class CDList{
+   Node* head;
+   Node*  tail;
+   
+public:
+   CDList()
+   {
+       head = tail = NULL;
+   }
+   
+   // Insert at position 1:
+   void insertAtHead(int nodeData)
+   {
+       Node* newNode = new Node(nodeData);
+       
+       if(head == NULL)
+       {
+           newNode->next=newNode->prev=newNode;
+           head = newNode;
+           tail = newNode;
+       }
+       else
+       {
+           newNode->next=head;
+           newNode->prev=tail;
+           head->prev=newNode;
+           tail->next=newNode;
+           
+           head = newNode;  // Updating the head.
+       }
+   }
+   
+   void insertAtTail(int nodeData)
+   {
+       Node* newNode = new Node(nodeData);
+       
+       if(head == NULL)
+       {
+           newNode->next = newNode->prev = newNode;
+           head = tail = newNode;
+       }
+       else
+       {
+           newNode->prev=tail;
+           tail->next=newNode;
+           tail=newNode;
+           
+           tail->next=head;
+           head->prev=tail;
+       }
+   }
+   
+   void print()
+   {
+       if(head == NULL)
+       {
+           cout << "Linked list is empty...." << endl;
+           return;
+       }
+       else
+       {
+           Node* temp = head->next;
+           cout << head->data << " -> ";
+           while(temp != head)
+           {
+               cout << temp->data << " -> ";
+               temp=temp->next;
+           }
+           cout << temp->data << endl;
+       }   
+   }
+};
+int main() {
+    CDList CDL1;
+    CDL1.insertAtHead(11);
+    CDL1.insertAtHead(12);
+    CDL1.insertAtHead(13);
+    CDL1.insertAtHead(14);
+    
+    CDL1.print();
+
+    CDL1.insertAtTail(10);
+    CDL1.insertAtTail(9);
+    
+    CDL1.print();
+    return 0;
+}
