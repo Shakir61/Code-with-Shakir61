@@ -1,0 +1,89 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Node{
+public:
+  int data;
+  Node* left;
+  Node* right;
+  
+  Node(int val)
+  {
+      data = val;
+      left = right = NULL;
+  }
+};
+
+static int index = -1;
+
+Node* buildTree(vector<int>preOrder)
+{
+    index++;
+    
+    if(preOrder[index] == -1)
+    {
+        return NULL;
+    }
+    
+    Node* root = new Node(preOrder[index]);
+    
+    root->left=buildTree(preOrder); // LEFT
+    root->right=buildTree(preOrder); // RIGHT
+    
+    return root;
+}
+
+int heightTree(Node* root)
+{
+    if(root == NULL)
+    {
+        return 0;
+    }
+    
+    int leftHeight = heightTree(root->left);
+    int rightHeight = heightTree(root->right);
+    
+    return max(leftHeight, rightHeight) + 1;
+}
+
+int countNodes(Node* root)
+{
+    if(root == NULL)
+    {
+        return 0;
+    }
+    
+    int leftNodes = countNodes(root->left);
+    int rightNodes = countNodes(root->right);
+    
+    return leftNodes + rightNodes + 1;
+}
+
+int addNodes(Node* root)
+{
+    if(root == NULL)
+    {
+        return 0;
+    }
+    
+    int leftSum = addNodes(root->left);
+    int rightSum = addNodes(root->right);
+    
+    return leftSum + rightSum + root->data;
+}
+
+int main() {
+    vector<int>preOrder={10,20,60,70,-1,-1,-1,-1,30,40,-1,-1,50,-1,-1};
+    
+    Node* root = buildTree(preOrder);
+    cout << root->data << endl;
+    cout << root->left->data << endl;
+    cout << root->right->data << endl;
+
+    cout << "Height of the tree: " << heightTree(root) << endl;
+    cout << "Count of nodes in the tree: " << countNodes(root) << endl;
+    cout << "Sum of values of nodes in the tree: " << addNodes(root) << endl;
+    return 0;
+}
+
