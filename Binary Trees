@@ -17,7 +17,7 @@ public:
   }
 };
 
-static int index = -1;
+static int index = -1;  // Static for the purpose to retian its value through out the function.
 
 Node* buildTree(vector<int>preOrder)
 {
