@@ -1,0 +1,125 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+void insert(int nodeVal, int loc)
+{
+    if(loc < 0)
+    {
+        cout << "Invalid positon....." << endl;
+        return;
+    }
+    esle if(loc == 1)
+    {
+      Node* newNode = new Node(value); // dynamic object.
+      if(head == NULL)
+      {
+          head = tail = newNode;
+          return;
+      }
+      else
+      {
+          newNode->next=head;
+          head=newNode;
+      }
+      length++;
+    }
+    else if(loc == length)
+    {
+      Node* newNode=new Node(value);
+      if(head == NULL)
+      {
+          head = tail = NULL;
+          return;
+      }
+      else
+      {
+          tail->next=newNode;
+          tail=newNode;
+      }
+      length++;
+    }
+    else{
+        Node* temp = head;
+        for(int i = 0; i < pos-1; i++)
+        {
+            if(temp == NULL)
+            {
+                cout << "Invalid position..." << endl;
+                return;
+            }
+            temp = temp->next;
+        }
+         
+        Node* newNode = new Node(node);
+        newNode->next=temp->next;  
+        temp->next=newNode;
+        length++;
+    }
+}
+
+void delete(int nodeData, int loc)
+{
+    if(loc < 0)
+    {
+        cout << "Invalid position....." << endl;
+        return;
+    }
+    else if(loc == 1)
+    {
+        if(head == NULL)
+        {
+           cout << "The linked list is empty..." << endl;
+           return;
+        }
+           Node *temp=head;
+           head=head->next;
+           temp->next = NULL;
+          
+           delete temp;
+           length--;
+    }
+    else if(loc == length)
+    {
+        if(head == NULL)
+        {
+           cout << "The linked list is empty..." << endl;
+           return;
+        }
+           Node *temp=head;
+           while(temp->next != tail)
+           {
+               temp = temp->next;
+           }
+           temp->next = NULL;
+           
+           delete tail;
+           tail = temp;
+           length--;
+    }
+    else
+    {
+        if(head == NULL)
+        {
+            cout << "Linked list is empty...." << endl;
+            return;
+        }
+        
+        Node temp = head;
+        for(int = 0; i < lenght-1; i++)
+        {
+            temp = temp->next;
+        }
+        deleteNode = temp->next;
+        temp->next = deleteNode->next;
+        
+        delete deleteNode;
+        deleteNode = NULL;
+        
+        length--;
+    }
+}
+int main() {
+    // Write C++ code here
+    std::cout << "Try programiz.pro";
+
+    return 0;
+}
