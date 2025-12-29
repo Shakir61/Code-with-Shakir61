@@ -24,6 +24,21 @@ public:
   {
       head = tail = NULL;
   }
+
+ ~List()
+  {
+     Node *currentPtr = head;
+     Node *nextPtr;
+
+     while(currentPtr != NULL)
+     { 
+         nextNode = currentPtr->next;
+         delete current;
+
+         currentPtr = nextPtr;
+     }
+  }
+
   
   void push_front(int value)
   {
@@ -150,31 +165,9 @@ int middleLL()
     
     return slow->data;
 }
-  
-
-  
-int searchLL(int node)
-  {
-      Node* position = head;
-      int index = 0;
-      
-      cout << "Your desired node is at position: ";
-      while(position != NULL)
-      {
-          if(position->data == node)
-          {
-              return index;
-          }
-          
-          position = position->next;
-          index++;
-      }
-      
-      return -1;
-  }
-  
-  void printLL()
-  {
+   
+void printLL()
+{
       Node* temp = head;
       cout << "Values inside the linked list: " << endl;
       while(temp != NULL)
@@ -183,7 +176,7 @@ int searchLL(int node)
           temp = temp->next;
       }
       cout << "NULL" << endl;
-  }
+}
 
   
 };
